@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: white;
+      padding: 35px 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 370px;
+    }
+
+    h5 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    input[type="button"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    input[type="button"]:hover {
+      background-color: #45a049;
+    }
+
+    .result-box {
+      background-color: #f9f9f9;
+      padding: 12px;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #444;
+      min-height: 25px;
+      border: 1px solid #ccc;
+    }
+
+    br {
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h5>Enter the number to check for palindrome:</h5>
+    <input type="text" id="palindromeInput" placeholder="Enter the number">
+    <input type="button" value="Check" onclick="checkNumber()">
+    <div class="result-box" id="palindromeResult"></div>
+
+    <br/><br/>
+
+    <h5>Enter number for Fibonacci:</h5>
+    <input type="text" id="fibonacciInput" placeholder="Enter the number">
+    <input type="button" value="Check" onclick="checkNumber1()">
+    <div class="result-box" id="fibonacciResult"></div>
+
+    <br/><br/>
+
+    <h5>Enter number for Factorial:</h5>
+    <input type="text" id="factorialInput" placeholder="Enter the number">
+    <input type="button" value="Check" onclick="checkNumber2()">
+    <div class="result-box" id="factorialResult"></div>
+  </div>
+
+  <script>
+    function checkNumber() {
+        const input = document.getElementById("palindromeInput").value;
+        const resultBox = document.getElementById("palindromeResult");
+
+        if (input === "") {
+            resultBox.innerText = "⚠️ Please enter a number.";
+            return;
+        }
+
+        const isPalindrome = input === input.split('').reverse().join('');
+        resultBox.innerText = isPalindrome ? "✅ The number is a palindrome." : "❌ The number is not a palindrome.";
+    }
+
+    function checkNumber1() {
+        const input = parseInt(document.getElementById("fibonacciInput").value);
+        const resultBox = document.getElementById("fibonacciResult");
+
+        if (isNaN(input) || input <= 0) {
+            resultBox.innerText = "⚠️ Please enter a positive number.";
+            return;
+        }
+
+        let a = 0, b = 1, c;
+        let result = [a];
+        if (input > 1) result.push(b);
+        for (let i = 2; i < input; i++) {
+            c = a + b;
+            result.push(c);
+            a = b;
+            b = c;
+        }
+
+        resultBox.innerText = "📘 Fibonacci Series: " + result.join(", ");
+    }
+
+    function checkNumber2() {
+        const input = parseInt(document.getElementById("factorialInput").value);
+        const resultBox = document.getElementById("factorialResult");
+
+        if (isNaN(input) || input < 0) {
+            resultBox.innerText = "⚠️ Please enter a non-negative number.";
+            return;
+        }
+
+        let factorial = 1;
+        for (let i = 1; i <= input; i++) {
+            factorial *= i;
+        }
+
+        resultBox.innerText = "🔢 Factorial: " + factorial;
+    }
+  </script>
+</body>
+</html>
